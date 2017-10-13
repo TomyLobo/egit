@@ -230,6 +230,7 @@ public class CommitOperation implements IEGitOperation {
 	private void commit() throws TeamException {
 		try (Git git = new Git(repo)) {
 			CommitCommand commitCommand = git.commit();
+			commitCommand.setAllowEmpty(false);
 			setAuthorAndCommitter(commitCommand);
 			commitCommand.setAmend(amending)
 					.setMessage(message)
@@ -279,6 +280,7 @@ public class CommitOperation implements IEGitOperation {
 	private void commitAll() throws TeamException {
 		try (Git git = new Git(repo)) {
 			CommitCommand commitCommand = git.commit();
+			commitCommand.setAllowEmpty(false);
 			setAuthorAndCommitter(commitCommand);
 			commit = commitCommand.setAll(true).setMessage(message)
 					.setInsertChangeId(createChangeId).call();
